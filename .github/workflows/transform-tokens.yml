@@ -34,6 +34,10 @@ jobs:
       - name: Download private gist file
         run: |
           curl -L ${{ github.event.client_payload.gist_url }} > tokens/${{github.event.client_payload.filename}}
+
+      - name: Delete private gist file from 
+        run: |
+          curl -L -X DELETE -H "Authorization: Bearer ${{github.token}}" ${{ github.event.client_payload.gist_url }}
       # we now initialize node to run amazon style dictionary to compile the tokens
       - name: Use Node.js 14.x
         uses: actions/setup-node@v1
